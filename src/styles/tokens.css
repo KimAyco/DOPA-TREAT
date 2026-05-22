@@ -1,0 +1,47 @@
+:root {
+  /* Brand — logo palette */
+  --slate: #2d3848;
+  --slate-light: #4a5d72;
+  --cream: #faf6eb;
+  --cream-warm: #fff8e7;
+  --honey: #e09b3a;
+  --honey-light: #f5c76a;
+  --espresso: #2a1816;
+  --sky: #d9eaf7;
+
+  /* Brand — menu palette */
+  --red: #c41e1e;
+  --red-dark: #8b0f0f;
+  --red-glow: rgba(196, 30, 30, 0.4);
+  --gold: #f5c518;
+  --gold-soft: #ffe566;
+  --paper: #f0ebe4;
+
+  /* Neutrals */
+  --white: #ffffff;
+  --black: #0d0d0d;
+  --muted: rgba(255, 255, 255, 0.72);
+  --glass: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.18);
+
+  /* Typography */
+  --font-display: 'Syne', system-ui, sans-serif;
+  --font-logo: 'Outfit', system-ui, sans-serif;
+  --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+
+  /* Layout */
+  --section-padding: clamp(4rem, 10vw, 7rem);
+  --container-max: 1280px;
+  --header-height: 80px;
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
+  --radius-pill: 999px;
+
+  /* Effects */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 12px 40px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 24px 64px rgba(0, 0, 0, 0.18);
+  --shadow-glow: 0 0 60px var(--red-glow);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}

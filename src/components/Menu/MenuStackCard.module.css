@@ -1,0 +1,211 @@
+.cardBtn {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  border-radius: var(--radius-lg);
+}
+
+.cardBtn:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: var(--espresso);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+  transition: box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.cardBtn:hover .card {
+  border-color: rgba(245, 197, 24, 0.45);
+  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.5);
+}
+
+.tapHint {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 5;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--espresso);
+  background: var(--gold);
+  border-radius: var(--radius-pill);
+  opacity: 0;
+  transform: translateY(-4px);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+.cardBtn:hover .tapHint,
+.cardBtn:focus-visible .tapHint {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.media {
+  position: relative;
+  flex: 1;
+  min-height: 200px;
+  overflow: hidden;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(42, 24, 22, 0.95) 0%,
+    rgba(42, 24, 22, 0.35) 45%,
+    transparent 70%
+  );
+}
+
+.mediaText {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 1.25rem 1.35rem;
+  z-index: 1;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  color: var(--white);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 0.25rem;
+}
+
+.tagline {
+  font-size: clamp(0.85rem, 1.5vw, 1rem);
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.4;
+}
+
+.body {
+  flex-shrink: 0;
+  padding: 1.25rem 1.5rem 1.5rem;
+  background: #1f1412;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.scrollHint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  text-align: center;
+  padding: 0.75rem 1rem 0.5rem;
+}
+
+.hintPrimary {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.35rem, 2.5vw, 1.65rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+}
+
+.hintSecondary {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+}
+
+.scrollIcon {
+  margin-top: 0.35rem;
+  color: var(--gold);
+  opacity: 0.95;
+  animation: hintBounce 2s ease-in-out infinite;
+}
+
+@keyframes hintBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scrollIcon {
+    animation: none;
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.flavorGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.flavorChip {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.65rem 0.5rem;
+  background: #2e1f1c;
+  border: 1px solid rgba(245, 197, 24, 0.25);
+  border-radius: var(--radius-sm);
+  text-align: center;
+}
+
+.flavorName {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--white);
+  line-height: 1.2;
+}
+
+.flavorPrice {
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--gold);
+}
+
+@media (max-width: 400px) {
+  .flavorGrid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,81 @@
+.fab {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 250;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-width: 56px;
+  min-height: 56px;
+  padding: 0 1.1rem;
+  background: linear-gradient(135deg, var(--honey) 0%, #d4842a 100%);
+  color: var(--white);
+  border: 2px solid var(--espresso);
+  border-radius: var(--radius-pill);
+  box-shadow:
+    0 8px 28px rgba(224, 155, 58, 0.5),
+    0 4px 12px rgba(0, 0, 0, 0.15);
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition:
+    transform 0.25s var(--ease-out),
+    box-shadow 0.25s var(--ease-out);
+}
+
+.fab:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow:
+    0 12px 36px rgba(224, 155, 58, 0.55),
+    0 6px 16px rgba(0, 0, 0, 0.18);
+}
+
+.fab:active {
+  transform: translateY(-1px) scale(1);
+}
+
+.label {
+  display: none;
+}
+
+@media (min-width: 480px) {
+  .fab {
+    min-width: auto;
+    padding: 0 1.25rem 0 1rem;
+  }
+
+  .label {
+    display: inline;
+  }
+}
+
+.badge {
+  position: absolute;
+  top: -6px;
+  right: -4px;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 800;
+  background: var(--red);
+  color: var(--white);
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--white);
+  box-shadow: var(--shadow-sm);
+}
+
+.badgeHidden {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fab:hover {
+    transform: none;
+  }
+}

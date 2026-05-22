@@ -1,0 +1,13 @@
+.accent {
+  display: flex;
+  gap: 0.25rem;
+  opacity: 0.85;
+}
+
+.light {
+  color: var(--white);
+}
+
+.dark {
+  color: var(--honey);
+}

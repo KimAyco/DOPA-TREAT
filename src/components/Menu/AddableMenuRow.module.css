@@ -1,0 +1,95 @@
+.row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px dashed rgba(42, 24, 22, 0.12);
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.rowStacked {
+  grid-template-columns: 1fr;
+  gap: 0.65rem;
+  padding: 1rem 0;
+}
+
+.rowMain {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--espresso);
+}
+
+.price {
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--honey);
+}
+
+.sizeRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.sizeChip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.5rem 0.75rem;
+  border: 2px solid rgba(42, 24, 22, 0.12);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.sizeChipActive {
+  border-color: var(--honey);
+  background: var(--cream-warm);
+}
+
+.sizeLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--slate-light);
+}
+
+.sizePrice {
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: var(--honey);
+}
+
+.addBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.45rem 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--espresso);
+  background: var(--gold-soft);
+  border: 2px solid var(--espresso);
+  border-radius: var(--radius-pill);
+  transition: transform 0.15s ease;
+  justify-self: end;
+}
+
+.rowStacked .addBtn {
+  justify-self: start;
+}
+
+.addBtn:hover {
+  transform: scale(1.03);
+}

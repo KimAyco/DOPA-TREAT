@@ -1,0 +1,131 @@
+.item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.65rem 0;
+}
+
+.item:first-child {
+  padding-top: 0;
+}
+
+.item:last-child {
+  padding-bottom: 0;
+}
+
+.itemStacked {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.5rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.itemStacked:last-child {
+  border-bottom: none;
+}
+
+.name {
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 600;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+
+.note {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: var(--muted);
+  margin-top: 0.15rem;
+}
+
+.leader {
+  flex: 1;
+  min-width: 1rem;
+  height: 1px;
+  align-self: center;
+  margin-bottom: 0.2rem;
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.25) 1px,
+    transparent 1px
+  );
+  background-size: 6px 1px;
+  background-repeat: repeat-x;
+}
+
+.price {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--gold);
+  white-space: nowrap;
+}
+
+.sizeRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.sizeChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  background: rgba(245, 197, 24, 0.12);
+  border: 1px solid rgba(245, 197, 24, 0.28);
+  border-radius: var(--radius-pill);
+  font-size: 0.85rem;
+}
+
+.sizeLabel {
+  color: var(--muted);
+  font-weight: 500;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.sizePrice {
+  color: var(--gold);
+  font-weight: 700;
+}
+
+/* Modal panel (light background) */
+.modalTheme .name {
+  color: var(--espresso);
+}
+
+.modalTheme .note {
+  color: var(--slate-light);
+}
+
+.modalTheme .leader {
+  background-image: radial-gradient(
+    circle,
+    rgba(42, 24, 22, 0.2) 1px,
+    transparent 1px
+  );
+}
+
+.modalTheme .price {
+  color: var(--honey);
+}
+
+.modalTheme.itemStacked {
+  border-bottom-color: rgba(42, 24, 22, 0.1);
+}
+
+.modalTheme .sizeChip {
+  background: var(--white);
+  border-color: rgba(224, 155, 58, 0.35);
+}
+
+.modalTheme .sizeLabel {
+  color: var(--slate-light);
+}
+
+.modalTheme .sizePrice {
+  color: var(--honey);
+}

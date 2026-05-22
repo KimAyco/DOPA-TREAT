@@ -1,0 +1,152 @@
+.menu {
+  position: relative;
+  padding: var(--section-padding) 0 var(--section-padding);
+  background: var(--red-dark);
+  overflow-x: clip;
+}
+
+.bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 0% 0%, var(--red) 0%, transparent 50%),
+    radial-gradient(ellipse 70% 50% at 100% 100%, #6b0f0f 0%, transparent 45%),
+    linear-gradient(180deg, var(--red-dark) 0%, #5a0a0a 100%);
+  pointer-events: none;
+}
+
+.bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.06) 1px,
+    transparent 1px
+  );
+  background-size: 20px 20px;
+  opacity: 0.5;
+}
+
+.headerWrap {
+  position: relative;
+  z-index: 2;
+  padding-bottom: 1.5rem;
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  padding-bottom: var(--section-padding);
+}
+
+.header {
+  text-align: center;
+  max-width: 36rem;
+  margin-inline: auto;
+}
+
+.title {
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.scrollHint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 1.25rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--gold);
+  animation: bounceHint 2s ease-in-out infinite;
+}
+
+@keyframes bounceHint {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scrollHint {
+    animation: none;
+  }
+}
+
+.stickyViewport {
+  position: sticky;
+  top: 0;
+  left: 0;
+  height: 100svh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--header-height) + 1rem) 1.25rem 2rem;
+  z-index: 1;
+}
+
+/* Static grid fallback (reduced motion) */
+.grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 1fr;
+  align-items: stretch;
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: auto auto;
+    gap: 1.35rem;
+  }
+
+  .grid [data-category='fried-tofu'] {
+    grid-column: 1 / 8;
+    grid-row: 1 / 3;
+  }
+
+  .grid [data-category='cucumber-salad'] {
+    grid-column: 8 / 13;
+    grid-row: 1;
+  }
+
+  .grid [data-category='cheesy-tofu'] {
+    grid-column: 8 / 13;
+    grid-row: 2;
+  }
+
+  .grid [data-category='squash-smoothie'] {
+    grid-column: 1 / 7;
+    grid-row: 3;
+  }
+
+  .grid [data-category='drinks'] {
+    grid-column: 7 / 13;
+    grid-row: 3;
+  }
+}
+
+@media (min-width: 1100px) {
+  .grid {
+    grid-template-rows: minmax(280px, auto) minmax(200px, auto) auto;
+  }
+}
