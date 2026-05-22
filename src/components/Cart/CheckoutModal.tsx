@@ -6,6 +6,7 @@ import {
 } from 'framer-motion';
 import { ArrowLeft, CheckCircle, CreditCard } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
+import { CONTACT } from '../../data/menu';
 import { formatPrice } from '../../utils/price';
 import { Button } from '../ui/Button';
 import styles from './CheckoutModal.module.css';
@@ -462,8 +463,8 @@ export function CheckoutModal() {
                   <h2 className={styles.successTitle}>Thank you!</h2>
                   <p className={styles.orderId}>{orderId ?? lastReceipt?.id}</p>
                   <p className={styles.successSubtitle}>
-                    Your order is confirmed. Pick up at Tabuan sa DNSC, New
-                    Visayas — this was a mock payment with no real charges.
+                    Your order is confirmed. Pick up at {CONTACT.locationShort}{' '}
+                    — this was a mock payment with no real charges.
                   </p>
                   <Button size="lg" className={styles.doneBtn} onClick={handleClose}>
                     Back to menu

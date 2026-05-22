@@ -68,7 +68,7 @@ export function Hero() {
           >
             Your daily
             <br />
-            <span className="gradient-text">dose of joy</span>
+            <span className={styles.titleAccent}>dose of joy</span>
           </motion.h1>
 
           <motion.p

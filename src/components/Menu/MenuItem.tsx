@@ -8,7 +8,8 @@ interface MenuItemProps {
 }
 
 export function MenuItem({ item, variant = 'default', theme = 'stack' }: MenuItemProps) {
-  const themeClass = theme === 'modal' ? styles.modalTheme : '';
+  const themeClass =
+    theme === 'modal' ? styles.modalTheme : theme === 'stack' ? styles.stackTheme : '';
 
   if (item.sizes?.length) {
     return (

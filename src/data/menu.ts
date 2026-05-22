@@ -26,7 +26,7 @@ export const menuCategories: MenuCategory[] = [
   {
     id: 'fried-tofu',
     title: 'DOPA TREAT MENU',
-    tagline: 'Fried tofu, salads, smoothies & refreshers',
+    tagline: 'Fried tofu, salads, graham cake & refreshers',
     image: '/images/tofu.jpg',
     imageAlt: 'DOPA TREATS menu — fried tofu in branded cups',
     layout: 'hero',
@@ -60,21 +60,13 @@ export const menuCategories: MenuCategory[] = [
     ],
   },
   {
-    id: 'squash-smoothie',
-    title: 'Squash Smoothie',
-    tagline: 'Creamy, chilled, and perfectly sweet',
-    image: '/images/squash-smoothie.jpg',
-    imageAlt: 'Squash smoothie topped with jelly and powder',
-    layout: 'wide',
-    items: [
-      {
-        name: 'Squash Smoothie',
-        sizes: [
-          { label: '8oz', price: '₱10' },
-          { label: '12oz', price: '₱15' },
-        ],
-      },
-    ],
+    id: 'graham-cake',
+    title: 'Graham Cake',
+    tagline: 'Sweet, layered, and made to share',
+    image: '/images/graham-cake.jpg',
+    imageAlt: 'Graham cake dessert from DOPA TREATS',
+    layout: 'compact',
+    items: [{ name: 'Graham Cake', price: '₱35' }],
   },
   {
     id: 'drinks',
@@ -144,7 +136,13 @@ export const galleryImages: GalleryImage[] = [
 ];
 
 export const CONTACT = {
-  location: 'Tabuan sa DNSC, New Visayas',
-  phone: '0993-334-7563',
-  phoneTel: 'tel:09933347563',
+  location: 'Davao del Norte State College, Panabo City, Philippines',
+  locationShort: 'Tabuan sa DNSC, New Visayas',
+  phone: '09123456789',
+  phoneTel: 'tel:09123456789',
+  mapsQuery: 'Davao del Norte State College, Panabo City, Philippines',
+  mapsLink:
+    'https://www.google.com/maps/search/?api=1&query=Davao+del+Norte+State+College%2C+Panabo+City%2C+Philippines',
+  mapsEmbedUrl:
+    'https://www.google.com/maps?q=Davao+del+Norte+State+College%2C+Panabo+City%2C+Philippines&z=16&output=embed',
 };

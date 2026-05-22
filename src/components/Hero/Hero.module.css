@@ -64,19 +64,36 @@
 }
 
 .title {
-  font-family: var(--font-display);
+  font-family: var(--font-logo);
   font-weight: 800;
   font-size: clamp(2.75rem, 8vw, 4.75rem);
-  line-height: 1.02;
-  letter-spacing: -0.03em;
+  line-height: 1.05;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   margin-bottom: 1.25rem;
 }
 
+.titleAccent {
+  display: inline-block;
+  font-family: var(--font-logo);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  background: linear-gradient(
+    135deg,
+    var(--gold-soft) 0%,
+    var(--honey) 45%,
+    var(--gold) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 .desc {
-  font-size: clamp(1rem, 2vw, 1.15rem);
+  font-size: clamp(0.85rem, 1.5vw, 0.95rem);
   color: var(--muted);
   max-width: 26rem;
-  line-height: 1.75;
+  line-height: 1.65;
   margin-bottom: 2rem;
 }
 

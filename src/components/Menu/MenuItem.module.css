@@ -92,6 +92,31 @@
   font-weight: 700;
 }
 
+/* Stack card body — uniform panels */
+.item.stackTheme,
+.itemStacked.stackTheme {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 5.5rem;
+  padding: 0.85rem 1rem !important;
+  background: #2e1f1c;
+  border: 1px solid rgba(245, 197, 24, 0.25);
+  border-radius: var(--radius-sm);
+  border-bottom: none;
+}
+
+.itemStacked.stackTheme {
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.item.stackTheme .leader {
+  display: none;
+}
+
 /* Modal panel (light background) */
 .modalTheme .name {
   color: var(--espresso);

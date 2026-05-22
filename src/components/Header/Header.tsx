@@ -34,7 +34,7 @@ export function Header() {
             />
             <span className={styles.logoText}>
               <span className={styles.logoMain}>DOPA</span>
-              <span className={styles.logoSub}>TREAT</span>
+              <span className={styles.logoSub}>TREATS</span>
             </span>
           </a>
 

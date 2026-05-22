@@ -4,6 +4,7 @@ import { Hero } from './components/Hero/Hero';
 import { Featured } from './components/Featured/Featured';
 import { MenuSection } from './components/Menu/MenuSection';
 import { Gallery } from './components/Gallery/Gallery';
+import { LocationMap } from './components/LocationMap/LocationMap';
 import { Feedback } from './components/Feedback/Feedback';
 import { Footer } from './components/Footer/Footer';
 import { CartDrawer } from './components/Cart/CartDrawer';
@@ -20,6 +21,7 @@ function App() {
         <Featured />
         <MenuSection />
         <Gallery />
+        <LocationMap />
         <Feedback />
       </main>
       <Footer />

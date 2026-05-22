@@ -11,8 +11,11 @@ interface MenuStackCardProps {
 }
 
 export function MenuStackCard({ category, onOpen, layoutId }: MenuStackCardProps) {
-  const isHero = category.layout === 'hero';
   const isWide = category.layout === 'wide';
+  const useFlavorGrid =
+    !category.stackHint &&
+    category.items.length > 1 &&
+    category.items.every((item) => !item.sizes?.length);
 
   return (
     <motion.button
@@ -50,7 +53,7 @@ export function MenuStackCard({ category, onOpen, layoutId }: MenuStackCardProps
               </span>
               <ChevronDown size={22} aria-hidden className={styles.scrollIcon} />
             </p>
-          ) : isHero && category.items.length > 1 ? (
+          ) : useFlavorGrid ? (
             <ul className={styles.flavorGrid}>
               {category.items.map((item) => (
                 <li key={item.name} className={styles.flavorChip}>
@@ -66,6 +69,7 @@ export function MenuStackCard({ category, onOpen, layoutId }: MenuStackCardProps
                   key={item.name}
                   item={item}
                   variant={isWide ? 'stacked' : 'default'}
+                  theme="stack"
                 />
               ))}
             </ul>

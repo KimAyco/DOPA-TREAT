@@ -14,7 +14,29 @@
     0 0 0 1px rgba(255, 255, 255, 0.6) inset;
   font-size: 0.8rem;
   line-height: 1.4;
-  pointer-events: none;
+  pointer-events: auto;
+}
+
+.dismiss {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid rgba(42, 24, 22, 0.15);
+  background: var(--white);
+  color: var(--espresso);
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.dismiss:hover {
+  background: var(--gold-soft);
+  transform: scale(1.05);
 }
 
 .receiptTop,

@@ -49,6 +49,7 @@ interface CartContextValue {
   removeLine: (id: string) => void;
   clearCart: () => void;
   completeOrder: () => string;
+  dismissReceipt: () => void;
 }
 
 const CartContext = createContext<CartContextValue | null>(null);
@@ -112,6 +113,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const clearCart = useCallback(() => setLines([]), []);
 
+  const dismissReceipt = useCallback(() => setLastReceipt(null), []);
+
   const completeOrder = useCallback(() => {
     const orderId = `DT-${Date.now().toString(36).toUpperCase().slice(-6)}`;
     setLines((currentLines) => {
@@ -164,6 +167,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       removeLine,
       clearCart,
       completeOrder,
+      dismissReceipt,
     }),
     [
       lines,
@@ -178,6 +182,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       removeLine,
       clearCart,
       completeOrder,
+      dismissReceipt,
     ],
   );
 

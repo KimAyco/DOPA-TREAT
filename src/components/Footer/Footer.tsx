@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion';
-import { MapPin, Phone, Clock } from 'lucide-react';
+import { Clock, MapPin, Phone } from 'lucide-react';
 import { CONTACT } from '../../data/menu';
 import { Button } from '../ui/Button';
 import styles from './Footer.module.css';
@@ -9,63 +9,107 @@ export function Footer() {
 
   return (
     <footer id="contact" className={styles.footer}>
-      <div className={styles.topGlow} aria-hidden="true" />
+      <div className={styles.mesh} aria-hidden />
+      <div className={styles.glow} aria-hidden />
+
       <div className={`container ${styles.inner}`}>
         <motion.div
-          className={styles.ctaBlock}
+          className={styles.heroRow}
           initial={reduced ? false : { opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className={styles.ctaTitle}>
-            Ready for your
-            <br />
-            <span className="gradient-text">daily dose?</span>
-          </h2>
-          <p className={styles.ctaDesc}>
-            Visit us at Tabuan or call ahead — we&apos;ll have your treats ready.
-          </p>
-          <Button href={CONTACT.phoneTel} size="lg">
-            <>
-              <Phone size={18} aria-hidden />
-              {CONTACT.phone}
-            </>
-          </Button>
-        </motion.div>
-
-        <div className={styles.infoGrid}>
-          <div className={styles.infoCard}>
-            <MapPin className={styles.icon} size={22} aria-hidden />
-            <div>
-              <span className={styles.infoLabel}>Location</span>
-              <p>{CONTACT.location}</p>
-            </div>
-          </div>
-          <div className={styles.infoCard}>
-            <Clock className={styles.icon} size={22} aria-hidden />
-            <div>
-              <span className={styles.infoLabel}>Hours</span>
-              <p>Open daily — message us for hours</p>
-            </div>
-          </div>
-          <div className={styles.brand}>
+          <div className={styles.brandBlock}>
             <img
-              src="/images/mascot.jpg"
+              src="/images/dopa-treats-logo.jpg"
               alt=""
-              className={styles.mascot}
-              width={64}
-              height={64}
+              className={styles.logoImg}
+              width={160}
+              height={160}
               loading="lazy"
             />
-            <span className={styles.logo}>DOPA TREATS</span>
-            <span className={styles.tagline}>Your daily dose of joy</span>
+            <div className={styles.brandText}>
+              <span className={styles.brandName}>
+                <span className={styles.brandMain}>DOPA</span>
+                <span className={styles.brandSub}>TREATS</span>
+              </span>
+              <span className={styles.brandTagline}>Your daily dose of joy</span>
+            </div>
           </div>
-        </div>
+
+          <div className={styles.ctaBlock}>
+            <h2 className={styles.ctaTitle}>
+              Ready for your
+              <br />
+              <span className={styles.ctaAccent}>daily dose?</span>
+            </h2>
+            <p className={styles.ctaDesc}>
+              Visit us at DNSC Panabo or call ahead — we&apos;ll have your treats
+              ready when you arrive.
+            </p>
+            <Button href={CONTACT.phoneTel} size="lg" className={styles.ctaBtn}>
+              <>
+                <Phone size={18} aria-hidden />
+                {CONTACT.phone}
+              </>
+            </Button>
+          </div>
+        </motion.div>
+
+        <motion.div
+          className={styles.infoRow}
+          initial={reduced ? false : { opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.08 }}
+        >
+          <article className={styles.infoCard}>
+            <span className={styles.infoIcon} aria-hidden>
+              <MapPin size={22} />
+            </span>
+            <div>
+              <h3 className={styles.infoLabel}>Location</h3>
+              <p className={styles.infoText}>{CONTACT.location}</p>
+              <p className={styles.infoMeta}>{CONTACT.locationShort}</p>
+            </div>
+          </article>
+
+          <article className={styles.infoCard}>
+            <span className={styles.infoIcon} aria-hidden>
+              <Clock size={22} />
+            </span>
+            <div>
+              <h3 className={styles.infoLabel}>Hours</h3>
+              <p className={styles.infoText}>Open daily</p>
+              <p className={styles.infoMeta}>Message us for today&apos;s hours</p>
+            </div>
+          </article>
+
+          <article className={`${styles.infoCard} ${styles.infoCardHighlight}`}>
+            <span className={styles.infoIcon} aria-hidden>
+              <Phone size={22} />
+            </span>
+            <div>
+              <h3 className={styles.infoLabel}>Call to order</h3>
+              <a href={CONTACT.phoneTel} className={styles.phoneLink}>
+                {CONTACT.phone}
+              </a>
+              <p className={styles.infoMeta}>Tap to call — demo site</p>
+            </div>
+          </article>
+        </motion.div>
       </div>
 
       <div className={styles.bottom}>
-        <p>&copy; {new Date().getFullYear()} DOPA TREATS</p>
+        <div className={`container ${styles.bottomInner}`}>
+          <p className={styles.copyright}>
+            &copy; {new Date().getFullYear()} DOPA TREATS
+          </p>
+          <a href="#location" className={styles.bottomLink}>
+            Directions
+          </a>
+        </div>
       </div>
     </footer>
   );
