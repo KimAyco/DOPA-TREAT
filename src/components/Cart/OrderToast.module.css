@@ -1,12 +1,9 @@
 .receipt {
   position: fixed;
-  bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
+  bottom: 5.5rem;
   left: 50%;
   z-index: 240;
-  width: min(calc(100vw - 1.5rem), 340px);
-  max-height: min(48dvh, 380px);
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  width: min(92vw, 340px);
   transform: translateX(-50%);
   background: var(--paper);
   color: var(--espresso);
@@ -150,25 +147,30 @@
 
 @media (max-width: 639px) {
   .receipt {
-    width: calc(100vw - 1rem);
-    max-height: min(40dvh, 300px);
-  }
-
-  .logo {
-    width: 60px;
+    left: max(0.75rem, env(safe-area-inset-left));
+    right: max(0.75rem, env(safe-area-inset-right));
+    width: auto;
+    transform: none;
+    bottom: calc(4.75rem + env(safe-area-inset-bottom, 0px));
+    max-height: min(42vh, 320px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .items {
-    max-height: 96px;
+    max-height: 100px;
+  }
+
+  .logo {
+    width: 56px;
   }
 }
 
 @media (min-width: 640px) {
   .receipt {
     left: auto;
-    right: calc(1.25rem + env(safe-area-inset-right, 0px));
+    right: max(1.25rem, env(safe-area-inset-right));
     transform: none;
     bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
-    max-height: min(52dvh, 420px);
   }
 }

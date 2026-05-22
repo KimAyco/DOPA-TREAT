@@ -4,7 +4,7 @@
   left: 0;
   right: 0;
   z-index: 100;
-  padding: 1rem 0;
+  padding: max(0.5rem, env(safe-area-inset-top)) 0 0.5rem;
   pointer-events: none;
 }
 

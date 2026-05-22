@@ -19,10 +19,21 @@
 .cardsContainer {
   position: relative;
   width: min(92vw, 420px);
-  height: 540px;
+  height: min(72vh, 540px);
   margin-inline: auto;
   transform-style: preserve-3d;
   perspective: 1000px;
+}
+
+@media (max-width: 479px) {
+  .stickyViewport {
+    padding: calc(var(--header-height) + 0.5rem) 0.75rem 1.25rem;
+  }
+
+  .cardsContainer {
+    width: min(94vw, 380px);
+    height: min(68vh, 480px);
+  }
 }
 
 @media (min-width: 768px) {

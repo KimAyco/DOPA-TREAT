@@ -1,0 +1,26 @@
+/* Mobile & safe-area layout */
+
+@media (max-width: 767px) {
+  :root {
+    --header-height: 72px;
+    --section-padding: clamp(2.75rem, 8vw, 4.5rem);
+  }
+
+  .container {
+    width: min(100% - 1.25rem, var(--container-max));
+  }
+
+  main {
+    padding-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media (max-width: 479px) {
+  :root {
+    --header-height: 64px;
+  }
+
+  .section-heading {
+    font-size: clamp(1.85rem, 8vw, 2.5rem);
+  }
+}

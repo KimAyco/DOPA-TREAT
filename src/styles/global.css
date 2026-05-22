@@ -1,5 +1,6 @@
 @import './tokens.css';
 @import './animations.css';
+@import './mobile.css';
 
 *,
 *::before,
@@ -27,8 +28,6 @@ body {
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
-  padding-left: env(safe-area-inset-left, 0);
-  padding-right: env(safe-area-inset-right, 0);
 }
 
 ::selection {

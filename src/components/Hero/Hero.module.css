@@ -209,6 +209,36 @@
   height: 64px;
 }
 
+@media (max-width: 479px) {
+  .hero {
+    padding-top: calc(var(--header-height) + 1.5rem);
+  }
+
+  .inner {
+    gap: 2rem;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .videoWrap {
+    width: min(85vw, 300px);
+    margin-inline: auto;
+  }
+
+  .floatImg {
+    width: 52px;
+    height: 52px;
+  }
+
+  .float3 {
+    width: 48px;
+    height: 48px;
+  }
+}
+
 @media (min-width: 960px) {
   .floatImg {
     width: 88px;
