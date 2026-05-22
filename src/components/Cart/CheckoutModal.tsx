@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   AnimatePresence,
   motion,
@@ -10,7 +10,10 @@ import { formatPrice } from '../../utils/price';
 import { Button } from '../ui/Button';
 import styles from './CheckoutModal.module.css';
 
-type Step = 'form' | 'processing' | 'success';
+type Step = 'form' | 'processing' | 'thankyou' | 'success';
+
+const PROCESSING_DURATION_MS = 8000;
+const THANKYOU_DURATION_MS = 2000;
 
 const PROCESSING_MESSAGES = [
   'Preparing your order…',
@@ -57,8 +60,7 @@ export function CheckoutModal() {
     isCheckoutOpen,
     closeCheckout,
     completeOrder,
-    lastOrderId,
-    dismissOrderSuccess,
+    lastReceipt,
   } = useCart();
 
   const [step, setStep] = useState<Step>('form');
@@ -69,8 +71,16 @@ export function CheckoutModal() {
   const [cardNumber, setCardNumber] = useState('');
   const [expiry, setExpiry] = useState('');
   const [cvv, setCvv] = useState('');
+  const checkoutVideoRef = useRef<HTMLVideoElement>(null);
 
-  const stepIndex = step === 'form' ? 0 : step === 'processing' ? 1 : 2;
+  const stepIndex =
+    step === 'form'
+      ? 0
+      : step === 'processing'
+        ? 1
+        : step === 'thankyou'
+          ? 2
+          : 3;
 
   useEffect(() => {
     if (!isCheckoutOpen) {
@@ -105,26 +115,51 @@ export function CheckoutModal() {
     setProgress(0);
     setProcessingMsg(0);
 
+    const video = checkoutVideoRef.current;
+    if (video) {
+      video.currentTime = 0;
+      video.volume = 1;
+      void video.play().catch(() => {
+        /* autoplay with sound may be blocked until user gesture */
+      });
+    }
+
+    const progressTick = PROCESSING_DURATION_MS / 100;
     const progressInterval = window.setInterval(() => {
-      setProgress((p) => Math.min(p + 4, 100));
-    }, 80);
+      setProgress((p) => Math.min(p + 1, 100));
+    }, progressTick);
 
     const msgInterval = window.setInterval(() => {
       setProcessingMsg((m) => (m + 1) % PROCESSING_MESSAGES.length);
-    }, 700);
+    }, PROCESSING_DURATION_MS / PROCESSING_MESSAGES.length);
 
     const doneTimer = window.setTimeout(() => {
-      const id = completeOrder();
-      setOrderId(id);
-      setStep('success');
-    }, 2800);
+      setStep('thankyou');
+    }, PROCESSING_DURATION_MS);
 
     return () => {
       window.clearInterval(progressInterval);
       window.clearInterval(msgInterval);
       window.clearTimeout(doneTimer);
+      if (video) {
+        video.pause();
+        video.currentTime = 0;
+      }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps -- run once per processing step
+  }, [step]);
+
+  useEffect(() => {
+    if (step !== 'thankyou') return;
+
+    const thankyouTimer = window.setTimeout(() => {
+      const id = completeOrder();
+      setOrderId(id);
+      setStep('success');
+    }, THANKYOU_DURATION_MS);
+
+    return () => window.clearTimeout(thankyouTimer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- run once per thank-you step
   }, [step]);
 
   const displayNumber = cardNumber || '•••• •••• •••• ••••';
@@ -153,7 +188,6 @@ export function CheckoutModal() {
 
   const handleClose = () => {
     closeCheckout();
-    if (step === 'success') dismissOrderSuccess();
   };
 
   const pageTransition = reduced
@@ -187,10 +221,14 @@ export function CheckoutModal() {
               Back
             </button>
             <h1 id="checkout-title" className={styles.headerTitle}>
-              {step === 'success' ? 'Order complete' : 'Checkout'}
+              {step === 'success'
+                ? 'Order complete'
+                : step === 'thankyou'
+                  ? 'Thank you'
+                  : 'Checkout'}
             </h1>
             <div className={styles.steps} aria-hidden>
-              {[0, 1, 2].map((i) => (
+              {[0, 1, 2, 3].map((i) => (
                 <span
                   key={i}
                   className={`${styles.stepDot} ${
@@ -338,9 +376,16 @@ export function CheckoutModal() {
                   exit="exit"
                   transition={{ duration: reduced ? 0 : 0.35 }}
                 >
-                  <div className={styles.processingOrb}>
-                    <div className={styles.orbRing} aria-hidden />
-                    <div className={styles.orbCore}>DOPA</div>
+                  <div className={styles.processingVideoWrap}>
+                    <video
+                      ref={checkoutVideoRef}
+                      className={styles.processingVideo}
+                      src="/images/dopa-checkout.mp4"
+                      autoPlay
+                      playsInline
+                      poster="/images/dopa-treats-logo.jpg"
+                      aria-label="DOPA TREATS checkout animation"
+                    />
                   </div>
                   <h2 className={styles.processingTitle}>Processing payment</h2>
                   <motion.p
@@ -361,6 +406,28 @@ export function CheckoutModal() {
                       style={{ width: '100%' }}
                     />
                   </div>
+                </motion.div>
+              )}
+
+              {step === 'thankyou' && (
+                <motion.div
+                  key="thankyou"
+                  className={styles.thankyou}
+                  variants={contentVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                  transition={{ duration: reduced ? 0 : 0.35 }}
+                  role="status"
+                >
+                  <img
+                    src="/images/dopa-treats-logo.jpg"
+                    alt="DOPA TREATS — Your daily dose of joy"
+                    className={styles.thankyouLogo}
+                  />
+                  <p className={styles.thankyouMessage}>
+                    Thank you, please come back!
+                  </p>
                 </motion.div>
               )}
 
@@ -393,7 +460,7 @@ export function CheckoutModal() {
                   </motion.div>
                   <span className={styles.mockBadge}>Demo order</span>
                   <h2 className={styles.successTitle}>Thank you!</h2>
-                  <p className={styles.orderId}>{orderId ?? lastOrderId}</p>
+                  <p className={styles.orderId}>{orderId ?? lastReceipt?.id}</p>
                   <p className={styles.successSubtitle}>
                     Your order is confirmed. Pick up at Tabuan sa DNSC, New
                     Visayas — this was a mock payment with no real charges.

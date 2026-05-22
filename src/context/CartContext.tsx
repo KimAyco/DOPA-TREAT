@@ -25,13 +25,20 @@ export interface AddItemInput {
   priceLabel: string;
 }
 
+export interface OrderReceipt {
+  id: string;
+  placedAt: string;
+  lines: CartLine[];
+  total: number;
+}
+
 interface CartContextValue {
   lines: CartLine[];
   itemCount: number;
   subtotal: number;
   isCartOpen: boolean;
   isCheckoutOpen: boolean;
-  lastOrderId: string | null;
+  lastReceipt: OrderReceipt | null;
   openCart: () => void;
   closeCart: () => void;
   openCheckout: () => void;
@@ -42,7 +49,6 @@ interface CartContextValue {
   removeLine: (id: string) => void;
   clearCart: () => void;
   completeOrder: () => string;
-  dismissOrderSuccess: () => void;
 }
 
 const CartContext = createContext<CartContextValue | null>(null);
@@ -55,7 +61,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [lines, setLines] = useState<CartLine[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
-  const [lastOrderId, setLastOrderId] = useState<string | null>(null);
+  const [lastReceipt, setLastReceipt] = useState<OrderReceipt | null>(null);
 
   const addItem = useCallback((input: AddItemInput, quantity = 1) => {
     const id = lineId(input.name, input.size);
@@ -108,14 +114,24 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const completeOrder = useCallback(() => {
     const orderId = `DT-${Date.now().toString(36).toUpperCase().slice(-6)}`;
-    setLastOrderId(orderId);
-    setLines([]);
+    setLines((currentLines) => {
+      const snapshot = currentLines.map((line) => ({ ...line }));
+      const total = snapshot.reduce(
+        (sum, line) => sum + line.unitPrice * line.quantity,
+        0,
+      );
+      setLastReceipt({
+        id: orderId,
+        placedAt: new Date().toLocaleString(),
+        lines: snapshot,
+        total,
+      });
+      return [];
+    });
     setIsCheckoutOpen(false);
     setIsCartOpen(false);
     return orderId;
   }, []);
-
-  const dismissOrderSuccess = useCallback(() => setLastOrderId(null), []);
 
   const itemCount = useMemo(
     () => lines.reduce((sum, l) => sum + l.quantity, 0),
@@ -134,7 +150,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       subtotal,
       isCartOpen,
       isCheckoutOpen,
-      lastOrderId,
+      lastReceipt,
       openCart: () => setIsCartOpen(true),
       closeCart: () => setIsCartOpen(false),
       openCheckout: () => {
@@ -148,7 +164,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
       removeLine,
       clearCart,
       completeOrder,
-      dismissOrderSuccess,
     }),
     [
       lines,
@@ -156,14 +171,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
       subtotal,
       isCartOpen,
       isCheckoutOpen,
-      lastOrderId,
+      lastReceipt,
       addItem,
       addItems,
       updateQuantity,
       removeLine,
       clearCart,
       completeOrder,
-      dismissOrderSuccess,
     ],
   );
 

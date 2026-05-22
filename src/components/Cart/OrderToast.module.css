@@ -1,34 +1,155 @@
-.toast {
+.receipt {
   position: fixed;
-  bottom: 1.5rem;
+  bottom: 5.5rem;
   left: 50%;
-  z-index: 350;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 1rem 1.25rem;
-  max-width: min(92vw, 360px);
+  z-index: 240;
+  width: min(92vw, 340px);
   transform: translateX(-50%);
-  background: var(--espresso);
-  color: var(--white);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-lg);
-  border: 2px solid var(--honey);
+  background: var(--paper);
+  color: var(--espresso);
+  border: 2px solid rgba(42, 24, 22, 0.12);
+  border-radius: var(--radius-sm);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.18),
+    0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  pointer-events: none;
 }
 
-.text {
-  flex: 1;
-  font-size: 0.9rem;
+.receiptTop,
+.receiptBottom {
+  padding: 0.35rem 0;
+  background: var(--cream-warm);
+}
+
+.perforation {
+  display: block;
+  height: 6px;
+  margin: 0 0.75rem;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 4px,
+    rgba(42, 24, 22, 0.2) 4px,
+    rgba(42, 24, 22, 0.2) 8px
+  );
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.85rem 1rem 0.65rem;
+  text-align: center;
+  border-bottom: 1px dashed rgba(42, 24, 22, 0.2);
+}
+
+.logo {
+  width: 72px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.brand {
+  font-family: var(--font-logo);
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: 0.12em;
+}
+
+.receiptLabel {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--honey);
+}
+
+.meta {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px dashed rgba(42, 24, 22, 0.15);
+}
+
+.metaRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.metaRow:last-child {
+  margin-bottom: 0;
 }
 
 .orderId {
+  font-family: var(--font-display);
   font-weight: 800;
-  color: var(--gold-soft);
+  color: var(--honey);
 }
 
-.dismiss {
-  font-size: 0.8rem;
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  max-height: 140px;
+  overflow-y: auto;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px dashed rgba(42, 24, 22, 0.15);
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.itemName {
   font-weight: 600;
-  color: var(--gold-soft);
-  text-decoration: underline;
+}
+
+.itemPrice {
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.85rem 1rem 0.5rem;
+  font-weight: 700;
+}
+
+.total {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--honey);
+}
+
+.pickup {
+  padding: 0 1rem;
+  font-size: 0.75rem;
+  color: var(--slate-light);
+  text-align: center;
+}
+
+.thanks {
+  padding: 0.5rem 1rem 1rem;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.9rem;
+  text-align: center;
+  color: var(--espresso);
+}
+
+@media (min-width: 640px) {
+  .receipt {
+    left: auto;
+    right: 1.25rem;
+    transform: none;
+    bottom: 5.5rem;
+  }
 }
