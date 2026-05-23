@@ -77,7 +77,7 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.15 }}
           >
-            Crispy fried tofu, refreshing salads, sweet graham cake, and
+            Crispy fried tofu, refreshing salads, jelly graham cake, and
             ice-cold drinks — crafted with love at DOPA TREATS.
           </motion.p>
 

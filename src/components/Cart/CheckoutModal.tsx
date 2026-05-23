@@ -4,7 +4,7 @@ import {
   motion,
   useReducedMotion,
 } from 'framer-motion';
-import { ArrowLeft, CheckCircle, CreditCard } from 'lucide-react';
+import { ArrowLeft, CheckCircle } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import { CONTACT } from '../../data/menu';
 import { formatPrice } from '../../utils/price';
@@ -22,24 +22,6 @@ const PROCESSING_MESSAGES = [
   'Confirming with DOPA TREATS…',
   'Almost there…',
 ];
-
-const DEMO_CARD = {
-  cardName: 'Demo Customer',
-  cardNumber: '4242 4242 4242 4242',
-  expiry: '12/28',
-  cvv: '123',
-};
-
-function formatCardNumber(value: string) {
-  const digits = value.replace(/\D/g, '').slice(0, 16);
-  return digits.replace(/(.{4})/g, '$1 ').trim();
-}
-
-function formatExpiry(value: string) {
-  const digits = value.replace(/\D/g, '').slice(0, 4);
-  if (digits.length <= 2) return digits;
-  return `${digits.slice(0, 2)}/${digits.slice(2)}`;
-}
 
 const pageVariants = {
   hidden: { y: '100%' },
@@ -68,10 +50,6 @@ export function CheckoutModal() {
   const [orderId, setOrderId] = useState<string | null>(null);
   const [processingMsg, setProcessingMsg] = useState(0);
   const [progress, setProgress] = useState(0);
-  const [cardName, setCardName] = useState('');
-  const [cardNumber, setCardNumber] = useState('');
-  const [expiry, setExpiry] = useState('');
-  const [cvv, setCvv] = useState('');
   const checkoutVideoRef = useRef<HTMLVideoElement>(null);
 
   const stepIndex =
@@ -89,15 +67,6 @@ export function CheckoutModal() {
       setOrderId(null);
       setProgress(0);
       setProcessingMsg(0);
-      setCardName('');
-      setCardNumber('');
-      setExpiry('');
-      setCvv('');
-    } else {
-      setCardName(DEMO_CARD.cardName);
-      setCardNumber(DEMO_CARD.cardNumber);
-      setExpiry(DEMO_CARD.expiry);
-      setCvv(DEMO_CARD.cvv);
     }
   }, [isCheckoutOpen]);
 
@@ -163,28 +132,8 @@ export function CheckoutModal() {
     // eslint-disable-next-line react-hooks/exhaustive-deps -- run once per thank-you step
   }, [step]);
 
-  const displayNumber = cardNumber || '•••• •••• •••• ••••';
-  const canPay =
-    cardName.trim().length > 1 &&
-    cardNumber.replace(/\s/g, '').length >= 16 &&
-    expiry.length >= 5 &&
-    cvv.length >= 3;
-
-  const startPayment = () => {
+  const handleGcashPay = () => {
     setStep('processing');
-  };
-
-  const handleDemoPay = () => {
-    setCardName(DEMO_CARD.cardName);
-    setCardNumber(DEMO_CARD.cardNumber);
-    setExpiry(DEMO_CARD.expiry);
-    setCvv(DEMO_CARD.cvv);
-    startPayment();
-  };
-
-  const handlePay = () => {
-    if (!canPay) return;
-    startPayment();
   };
 
   const handleClose = () => {
@@ -256,7 +205,7 @@ export function CheckoutModal() {
                   exit="exit"
                   transition={{ duration: reduced ? 0 : 0.35 }}
                 >
-                  <div className={styles.formGrid}>
+                  <div className={styles.checkoutForm}>
                     <section className={styles.summaryCard}>
                       <h2 className={styles.summaryTitle}>Your order</h2>
                       <ul className={styles.lineList}>
@@ -284,84 +233,18 @@ export function CheckoutModal() {
                       </div>
                     </section>
 
-                    <section className={styles.paymentCard}>
-                      <p className={styles.paymentLabel}>Virtual payment</p>
-                      <motion.div
-                        className={styles.cardPreview}
-                        layout
-                        transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                      >
-                        <div className={styles.cardChip} aria-hidden />
-                        <span className={styles.cardBrand}>DOPA TREATS</span>
-                        <span className={styles.cardNumber}>{displayNumber}</span>
-                        <div className={styles.cardRow}>
-                          <span>{cardName || 'CARDHOLDER'}</span>
-                          <span>{expiry || 'MM/YY'}</span>
-                        </div>
-                      </motion.div>
-
-                      <form
-                        className={styles.form}
-                        onSubmit={(e) => {
-                          e.preventDefault();
-                          if (canPay) handlePay();
-                          else handleDemoPay();
-                        }}
-                      >
-                        <div className={styles.field}>
-                          <label htmlFor="card-name">Name on card</label>
-                          <input
-                            id="card-name"
-                            value={cardName}
-                            onChange={(e) => setCardName(e.target.value)}
-                            placeholder="Juan Dela Cruz"
-                            autoComplete="cc-name"
-                          />
-                        </div>
-                        <div className={styles.field}>
-                          <label htmlFor="card-number">Card number</label>
-                          <input
-                            id="card-number"
-                            value={cardNumber}
-                            onChange={(e) =>
-                              setCardNumber(formatCardNumber(e.target.value))
-                            }
-                            placeholder="4242 4242 4242 4242"
-                            inputMode="numeric"
-                            autoComplete="cc-number"
-                          />
-                        </div>
-                        <div className={styles.fieldRow}>
-                          <div className={styles.field}>
-                            <label htmlFor="card-expiry">Expiry</label>
-                            <input
-                              id="card-expiry"
-                              value={expiry}
-                              onChange={(e) =>
-                                setExpiry(formatExpiry(e.target.value))
-                              }
-                              placeholder="MM/YY"
-                              inputMode="numeric"
-                              autoComplete="cc-exp"
-                            />
-                          </div>
-                          <div className={styles.field}>
-                            <label htmlFor="card-cvv">CVV</label>
-                            <input
-                              id="card-cvv"
-                              value={cvv}
-                              onChange={(e) =>
-                                setCvv(
-                                  e.target.value.replace(/\D/g, '').slice(0, 4),
-                                )
-                              }
-                              placeholder="123"
-                              inputMode="numeric"
-                              autoComplete="cc-csc"
-                            />
-                          </div>
-                        </div>
-                      </form>
+                    <section className={styles.gcashInfo}>
+                      <img
+                        src="/images/gcash.png"
+                        alt=""
+                        className={styles.gcashInfoIcon}
+                        width={48}
+                        height={48}
+                      />
+                      <p className={styles.gcashInfoText}>
+                        Tap <strong>GCASH PAYMENT</strong> below to complete your
+                        demo order. No real charges.
+                      </p>
                     </section>
                   </div>
                 </motion.div>
@@ -477,33 +360,24 @@ export function CheckoutModal() {
           {step === 'form' && (
             <footer className={styles.footer}>
               <div className={styles.footerInner}>
-                <div className={styles.footerActions}>
-                  <Button
-                    type="button"
-                    size="lg"
-                    className={styles.payBtn}
-                    disabled={lines.length === 0}
-                    onClick={handleDemoPay}
-                  >
-                    <>
-                      <CreditCard size={18} aria-hidden />
-                      Demo Pay {formatPrice(subtotal)}
-                    </>
-                  </Button>
-                  <Button
-                    type="button"
-                    size="lg"
-                    variant="secondary"
-                    className={styles.payBtnSecondary}
-                    disabled={!canPay}
-                    onClick={handlePay}
-                  >
-                    Pay with card details
-                  </Button>
-                </div>
-                <p className={styles.mockNote}>
-                  One-tap demo — test card is pre-filled. No real charges.
-                </p>
+                <Button
+                  type="button"
+                  size="lg"
+                  className={styles.payBtn}
+                  disabled={lines.length === 0}
+                  onClick={handleGcashPay}
+                >
+                  <>
+                    <img
+                      src="/images/gcash.png"
+                      alt=""
+                      className={styles.gcashIcon}
+                      width={28}
+                      height={28}
+                    />
+                    GCASH PAYMENT
+                  </>
+                </Button>
               </div>
             </footer>
           )}

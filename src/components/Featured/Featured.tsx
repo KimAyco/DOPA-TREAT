@@ -4,8 +4,8 @@ import styles from './Featured.module.css';
 const highlights = [
   'Fried Tofu from ₱35',
   'Cucumber Salad ₱30',
-  'Graham Cake ₱35',
-  'Drinks from ₱10',
+  'Jelly Graham cake ₱35',
+  'Squash Smoothie from ₱10',
   'Tabuan sa DNSC',
   'Fresh daily',
 ];

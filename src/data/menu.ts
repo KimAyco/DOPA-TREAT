@@ -26,7 +26,7 @@ export const menuCategories: MenuCategory[] = [
   {
     id: 'fried-tofu',
     title: 'DOPA TREAT MENU',
-    tagline: 'Fried tofu, salads, graham cake & refreshers',
+    tagline: 'Fried tofu, salads, jelly graham cake & drinks',
     image: '/images/tofu.jpg',
     imageAlt: 'DOPA TREATS menu — fried tofu in branded cups',
     layout: 'hero',
@@ -61,12 +61,12 @@ export const menuCategories: MenuCategory[] = [
   },
   {
     id: 'graham-cake',
-    title: 'Graham Cake',
-    tagline: 'Sweet, layered, and made to share',
-    image: '/images/graham-cake.jpg',
-    imageAlt: 'Graham cake dessert from DOPA TREATS',
+    title: 'Jelly Graham cake',
+    tagline: 'Creamy graham layers with glossy jelly cubes',
+    image: '/images/jelly-graham-cake.jpg',
+    imageAlt: 'Jelly Graham cake in cups from DOPA TREATS',
     layout: 'compact',
-    items: [{ name: 'Graham Cake', price: '₱35' }],
+    items: [{ name: 'Jelly Graham cake', price: '₱35' }],
   },
   {
     id: 'drinks',
@@ -78,6 +78,23 @@ export const menuCategories: MenuCategory[] = [
     items: [
       {
         name: 'Lemon Turmeric Juice',
+        sizes: [
+          { label: '8oz', price: '₱10' },
+          { label: '12oz', price: '₱15' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'squash-smoothie',
+    title: 'Squash Smoothie',
+    tagline: 'Golden, creamy squash blended smooth',
+    image: '/images/squash-smoothie.jpg',
+    imageAlt: 'Squash smoothie in cups from DOPA TREATS',
+    layout: 'wide',
+    items: [
+      {
+        name: 'Squash Smoothie',
         sizes: [
           { label: '8oz', price: '₱10' },
           { label: '12oz', price: '₱15' },
@@ -114,23 +131,23 @@ export const galleryImages: GalleryImage[] = [
   },
   {
     id: 'drink',
-    src: '/images/drink.jpg',
-    alt: 'Golden squash smoothie with ice',
-    label: 'Drinks',
+    src: '/images/squash-smoothie.jpg',
+    alt: 'Golden squash smoothie in cups',
+    label: 'Squash Smoothie',
     layout: 'accent',
   },
   {
     id: 'spread-1',
-    src: '/images/gallery-2.jpg',
-    alt: 'DOPA TREATS food spread',
-    label: 'At the stall',
+    src: '/images/jelly-graham-cake.jpg',
+    alt: 'Jelly graham cake',
+    label: 'jelly graham cake',
     layout: 'standard',
   },
   {
     id: 'spread-2',
-    src: '/images/gallery-3.jpg',
-    alt: 'Treats and refreshments',
-    label: 'Daily favorites',
+    src: '/images/lemon-turmeric-juice.jpg',
+    alt: 'Lemon turmeric juice with ice',
+    label: 'lemon turmeric juice',
     layout: 'standard',
   },
 ];

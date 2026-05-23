@@ -95,17 +95,43 @@
   margin: 0 auto;
 }
 
-/* —— Form layout —— */
-.formGrid {
-  display: grid;
-  gap: 1.5rem;
+/* —— Checkout form —— */
+.checkoutForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 520px;
+  margin: 0 auto;
 }
 
-@media (min-width: 768px) {
-  .formGrid {
-    grid-template-columns: 1fr 1fr;
-    align-items: start;
-  }
+.gcashInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.15rem 1.25rem;
+  background: rgba(0, 115, 207, 0.08);
+  border: 2px solid rgba(0, 115, 207, 0.2);
+  border-radius: var(--radius-md);
+}
+
+.gcashInfoIcon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: var(--white);
+  padding: 4px;
+}
+
+.gcashInfoText {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--espresso);
+}
+
+.gcashInfoText strong {
+  color: #0073cf;
 }
 
 .summaryCard {
@@ -167,102 +193,6 @@
   color: var(--honey);
 }
 
-.paymentCard {
-  padding: 1.25rem;
-  background: var(--white);
-  border: 2px solid rgba(42, 24, 22, 0.08);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
-}
-
-.paymentLabel {
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--honey);
-  margin-bottom: 1rem;
-}
-
-.cardPreview {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  padding: 1.35rem;
-  margin-bottom: 1.25rem;
-  border-radius: var(--radius-md);
-  background: linear-gradient(135deg, var(--slate) 0%, #1a2330 55%, #2d3848 100%);
-  color: var(--white);
-  box-shadow: var(--shadow-md);
-  transform-origin: center;
-}
-
-.cardChip {
-  width: 40px;
-  height: 28px;
-  border-radius: 6px;
-  background: linear-gradient(135deg, var(--gold-soft), var(--honey));
-  opacity: 0.9;
-}
-
-.cardBrand {
-  font-size: 0.65rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  opacity: 0.75;
-}
-
-.cardNumber {
-  font-family: var(--font-display);
-  font-size: clamp(1.1rem, 3vw, 1.35rem);
-  letter-spacing: 0.14em;
-}
-
-.cardRow {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.85rem;
-  opacity: 0.9;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: 0.85rem;
-}
-
-.field label {
-  display: block;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--slate-light);
-  margin-bottom: 0.35rem;
-}
-
-.field input {
-  width: 100%;
-  padding: 0.8rem 1rem;
-  font-size: 1rem;
-  font-family: inherit;
-  border: 2px solid rgba(42, 24, 22, 0.12);
-  border-radius: var(--radius-sm);
-  background: var(--cream-warm);
-  color: var(--espresso);
-}
-
-.field input:focus {
-  outline: none;
-  border-color: var(--honey);
-}
-
-.fieldRow {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.85rem;
-}
-
 .footer {
   position: relative;
   z-index: 2;
@@ -277,22 +207,18 @@
   margin: 0 auto;
 }
 
-.footerActions {
-  display: flex;
-  flex-direction: column;
-  gap: 0.65rem;
-}
-
-.payBtn,
-.payBtnSecondary {
+.payBtn {
   width: 100%;
 }
 
-.mockNote {
-  margin-top: 0.5rem;
-  font-size: 0.7rem;
-  text-align: center;
-  color: var(--slate-light);
+.gcashIcon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  flex-shrink: 0;
+  border-radius: 6px;
+  background: var(--white);
+  padding: 2px;
 }
 
 /* —— Processing full-page —— */
@@ -517,10 +443,6 @@
 
   .footer {
     padding: 0.75rem 1rem max(0.85rem, env(safe-area-inset-bottom, 0px));
-  }
-
-  .footerActions {
-    gap: 0.5rem;
   }
 
   .success {
