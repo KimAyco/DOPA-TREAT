@@ -43,8 +43,15 @@
 }
 
 .copy {
+  display: none;
   color: var(--white);
   z-index: 2;
+}
+
+@media (min-width: 960px) {
+  .copy {
+    display: block;
+  }
 }
 
 .badge {
@@ -224,6 +231,16 @@
   right: 8%;
   width: 64px;
   height: 64px;
+}
+
+@media (max-width: 959px) {
+  .inner {
+    justify-items: center;
+  }
+
+  .visual {
+    min-height: min(70vh, 520px);
+  }
 }
 
 @media (max-width: 479px) {
